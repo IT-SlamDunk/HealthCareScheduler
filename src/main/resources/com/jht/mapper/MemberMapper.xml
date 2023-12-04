@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- XML이라 문법을 언어에 맞추거나 문자열 더하기를 해줄 필요가 없이 데이터를 입력하기만 하면 된다 -->
+
+<!DOCTYPE mapper									
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- JDBC의 ? ? ? ? 매개변수로 값을 가져오는 것처럼 매개변수의 값으로 컬럼의 값을 가져오는 과정 -->
+  
+<mapper namespace="com.jht.mapper.MemberMapper">
+	<insert id="write">
+		insert into member values(#{id}, #{pw}, #{name});
+	</insert>
+	
+	<select id="list" resultType="com.jht.model.MemberDTO">
+	<!-- resulType은 select문에서만 사용되는 속성이다 -->
+		select * from member;
+		
+		<!-- 배열이어서 여러 건으로 전송되는 방식 -->
+		
+	</select>
+	
+	<select id="detail" resultType="com.jht.model.MemberDTO">
+		select * from member
+		<!-- 선택된 id의 값(예를 들어 abc1234)이 아래의 #{id} 매개변수 안에 대입된다 -->
+		where id = #{id}
+	</select>
+		<!-- 프라이머리 키여서 중복이 아닌 한 번에, 한 값씩만 조회된다 -->
+		<!-- 객체 변수 데이터여서 여러 건으로 전송되는 방식 -->
+
+		<!-- ?id= 로 아이디에 대입되는 주소값을 지정해주어서 회원목록 페이지에서 회원정보 조회 페이지로 연결될 수 있도록 url에서 주소를 구분지어준다 -->
+		 
+		<!-- 컨트롤러에서 DB로 향할 때는                                      매개변수의 작성에 유의하고 -->
+		<!-- DB에서 뷰로 향할 때는 리턴문으로 전송 코드를 작성해나가며 리턴타입의 작성에 유의할 것-->
+
+	<update id="modify">
+		update member
+		set  pw  = #{pw},
+			name = #{name}
+		where id="#{id}
+	</update>
+	
+	<delete id="remove">
+		delete from member
+		where id=#{id}
+	</delete>
+
+	<select id="login" resultType="com.jht.model.MemberDTO">
+		select *
+		from member
+		where id=#{id}
+		and	  pw=#{pw}
+	</select>
+
+</mapper>
+
+
+
+		<!-- 컨트롤러에서 DB로 향할 때는                                            매개변수의 작성에 유의하고 -->
+		<!-- DB에서 뷰로 향할 때는 리턴문으로 전송 코드를 작성해나가며 리턴타입의 작성에 유의할 것-->

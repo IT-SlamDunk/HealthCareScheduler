@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper									
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 매퍼 역할을 함을 선언
+
+SQL문장 작성 구간
+mapper 태그 내부에서는 코드를 열어 shift + space를 누르면 쿼리문을 빠르게 입력할 수 있다
+
+mapper 태그 내부에 namespace="com.jht.mapper.TimeMapper" TimeMapper.xml과 
+	TimeMapper.java가 연동된다 자바 클래스 소스에서는 쿼리문 작성을 빠르게 할 수 없기에 (큰 따옴표로 구분해주어야 한다), 
+	인터페이스(추상 메서드만 사용하기에 기능만 빌려서)를 이용해 XML과 자바 클래스를 연결해 XML에서 빠르게 sql 쿼리 코드를 간편히 작성할 수 있도록 하는 것이다 -->
+
+<mapper namespace="com.jht.mapper.TimeMapper">
+	<select id="getTime" resultType="String">
+		select sysdate()
+	</select>
+</mapper>
